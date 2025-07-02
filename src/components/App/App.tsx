@@ -22,7 +22,10 @@ export default function App() {
     setSelectedMovie(movie);
     setIsModalOpen(true);
   };
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedMovie(null);
+  };
 
   const handleSearch = async (query: string) => {
     try {
