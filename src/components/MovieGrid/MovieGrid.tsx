@@ -3,14 +3,14 @@ import css from './MovieGrid.module.css';
 
 interface MoveGridProps {
   movies: Movie[];
-  onSelect?: () => void;
+  onSelect: (movie: Movie) => void;
 }
 
-export default function MoveGrid({ movies }: MoveGridProps) {
+export default function MoveGrid({ movies, onSelect }: MoveGridProps) {
   return (
     <ul className={css.grid}>
       {movies.map(movie => (
-        <li key={movie.id}>
+        <li key={movie.id} onClick={() => onSelect(movie)}>
           <div className={css.card}>
             <img
               className={css.image}
