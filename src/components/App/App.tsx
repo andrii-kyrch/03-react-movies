@@ -33,7 +33,7 @@ export default function App() {
       setMovies([]);
       setIsLoading(true);
       const data = await fetchMovies(query);
-      if (!(data.length > 0)) {
+      if (data.length === 0) {
         notify();
         return;
       }
