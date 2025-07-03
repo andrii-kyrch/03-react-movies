@@ -4,7 +4,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import css from './App.module.css';
 import type { Movie } from '../../types/movie';
 import toast, { Toaster } from 'react-hot-toast';
-import MoveGrid from '../MovieGrid/MovieGrid';
+import MovieGrid from '../MovieGrid/MovieGrid';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import MovieModal from '../MovieModal/MovieModal';
@@ -14,16 +14,14 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const notify = () => toast.error('No movies found for your request.');
 
   const openModal = (movie: Movie) => {
     setSelectedMovie(movie);
-    setIsModalOpen(true);
   };
+
   const closeModal = () => {
-    setIsModalOpen(false);
     setSelectedMovie(null);
   };
 
@@ -50,9 +48,9 @@ export default function App() {
       <SearchBar onSubmit={handleSearch} />
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {movies.length > 0 && <MoveGrid movies={movies} onSelect={openModal} />}
+      {movies.length > 0 && <MovieGrid movies={movies} onSelect={openModal} />}
       <Toaster />
-      {isModalOpen && selectedMovie && (
+      {selectedMovie && (
         <MovieModal movie={selectedMovie} onClose={closeModal} />
       )}
     </div>
